@@ -1,0 +1,15 @@
+artifact_uri: file:////home/felipep/Documentos/universidad/universidad 7mo/aprendizaje
+  automatico/practica 3/exportaciones/cnn-frutas-explicable/mlruns/562053947662302122/9d5de5f9ab074f2d89c3de2f9067bc3d/artifacts
+end_time: 1768269966846
+entry_point_name: ''
+experiment_id: '562053947662302122'
+lifecycle_stage: active
+run_id: 9d5de5f9ab074f2d89c3de2f9067bc3d
+run_name: CNN_Frutas_v1
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1768269764232
+status: 3
+tags: []
+user_id: felipep

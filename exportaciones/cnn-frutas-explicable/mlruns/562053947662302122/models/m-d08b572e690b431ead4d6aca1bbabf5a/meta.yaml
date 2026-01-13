@@ -1,0 +1,11 @@
+artifact_location: file:////home/felipep/Documentos/universidad/universidad 7mo/aprendizaje
+  automatico/practica 3/exportaciones/cnn-frutas-explicable/mlruns/562053947662302122/models/m-d08b572e690b431ead4d6aca1bbabf5a/artifacts
+creation_timestamp: 1768269932124
+experiment_id: '562053947662302122'
+last_updated_timestamp: 1768269935983
+model_id: m-d08b572e690b431ead4d6aca1bbabf5a
+model_type: null
+name: model
+source_run_id: 9d5de5f9ab074f2d89c3de2f9067bc3d
+status: 2
+status_message: null

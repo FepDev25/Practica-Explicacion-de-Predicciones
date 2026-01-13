@@ -1,0 +1,23 @@
+artifact_path: file:////home/felipep/Documentos/universidad/universidad 7mo/aprendizaje
+  automatico/practica 3/exportaciones/cnn-frutas-explicable/mlruns/562053947662302122/models/m-d08b572e690b431ead4d6aca1bbabf5a/artifacts
+flavors:
+  python_function:
+    data: data
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.tensorflow
+    python_version: 3.11.13
+  tensorflow:
+    code: null
+    data: data
+    keras_version: 2.15.0
+    model_type: keras
+    save_format: tf
+mlflow_version: 3.8.1
+model_id: m-d08b572e690b431ead4d6aca1bbabf5a
+model_size_bytes: 21005194
+model_uuid: m-d08b572e690b431ead4d6aca1bbabf5a
+prompts: null
+run_id: 9d5de5f9ab074f2d89c3de2f9067bc3d
+utc_time_created: '2026-01-13 02:05:32.140877'
