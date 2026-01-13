@@ -21,6 +21,7 @@ Esta práctica explora cuatro aspectos fundamentales del aprendizaje automático
 - Aplicar técnicas de Explicabilidad de IA (XAI): **Grad-CAM**, **LIME**, **Integrated Gradients**
 - Trabajar con datos tabulares desbalanceados y técnicas de balanceo
 - Comparar enfoques de Machine Learning clásico vs Deep Learning
+- Implementar tracking de experimentos con **MLflow** para reproducibilidad y gestión de modelos
 
 ---
 
@@ -48,13 +49,34 @@ practica-3/
 │       └── PreprocesamientoRandomForestConPipeline.ipynb
 │
 ├── ejercicio-diapositivas/
-│   └── ejercicio2.ipynb                          # ✅ Ejercicio 1: Ganancia de Información
+│   └── ejercicio2.ipynb                          # Ejercicio 1: Ganancia de Información
 │
-└── ejericio-modelos/                             # ✅ Ejercicios principales (2, 3 y 4)
-    ├── modelo-ml-svm-explicable.ipynb            # Ejercicio 2A: SVM para imágenes
-    ├── modelo-ml-cnn-explicable.ipynb            # Ejercicio 2B: CNN para imágenes + Grad-CAM
-    ├── online-shoppers-explicable-rf.ipynb       # Ejercicio 3: Random Forest + LIME
-    └── online-shoppers-explicable-gi.ipynb       # Ejercicio 4: Red Neuronal + Integrated Gradients
+├── ejericio-modelos/                             # Ejercicios principales (2, 3 y 4)
+│   ├── modelo-ml-svm-explicable.ipynb            # Ejercicio 2A: SVM para imágenes
+│   ├── modelo-ml-cnn-explicable.ipynb            # Ejercicio 2B: CNN para imágenes + Grad-CAM
+│   ├── online-shoppers-explicable-rf.ipynb       # Ejercicio 3: Random Forest + LIME
+│   ├── online-shoppers-explicable-gi.ipynb       # Ejercicio 4: Red Neuronal + Integrated Gradients
+│   └── exportaciones/                            # resultados de experimentos con MLflow
+│       ├── cnn-frutas-explicable/                # Exportaciones del modelo CNN
+│       │   ├── mlruns/                           # Tracking MLflow
+│       │   ├── models/                           # Modelos guardados
+│       │   └── plots/                            # Gráficas generadas
+│       ├── svm-frutas-explicable/                # Exportaciones del modelo SVM
+│       │   ├── mlruns/
+│       │   ├── models/
+│       │   └── plots/
+│       ├── nn-shoppers-gi/                       # Exportaciones Red Neuronal + IG
+│       │   ├── mlruns/
+│       │   ├── models/
+│       │   ├── plots/
+│       │   └── explanations/
+│       └── rf-shoppers-lime/                     # Exportaciones Random Forest + LIME
+│           ├── mlruns/
+│           ├── models/
+│           ├── plots/
+│           ├── explanations/
+│           └── trees/
+└──
 ```
 
 ---
@@ -192,6 +214,15 @@ svm_model.fit(X_train_flat, y_train)
 - Computacionalmente costoso con grandes datasets
 - Difícil de interpretar en espacios de alta dimensión
 
+#### Tracking con MLflow
+
+Todos los experimentos se registran automáticamente con MLflow:
+
+- **Parámetros**: kernel, C, gamma, train/test split
+- **Métricas**: accuracy, precision, recall, F1-score
+- **Artefactos**: modelo guardado (pickle), gráficas de confusión, explicaciones
+- **Ubicación**: `exportaciones/svm-frutas-explicable/mlruns/`
+
 ### 2B. Modelo CNN con Grad-CAM
 
 #### Arquitectura CNN
@@ -250,6 +281,22 @@ cnn_model = Sequential([
 2. **Mejor rendimiento**: En tareas de visión por computador
 3. **Explicabilidad visual**: Grad-CAM muestra qué "ve" el modelo
 4. **Escalabilidad**: Mejor con grandes datasets
+
+#### Tracking con MLflow
+
+Integración completa con MLflow para gestión de experimentos:
+
+- **Parámetros**: arquitectura (capas, filtros), épocas, batch_size, learning_rate, dropout
+- **Métricas**: train/val accuracy, train/val loss, test accuracy, precision, recall, F1
+- **Artefactos**: 
+  - Modelo completo (.h5)
+  - Arquitectura (JSON)
+  - Pesos (.h5)
+  - Clases (JSON)
+  - Curvas de entrenamiento
+  - Matrices de confusión
+  - Mapas Grad-CAM
+- **Ubicación**: `exportaciones/cnn-frutas-explicable/mlruns/`
 
 ### Archivos
 
@@ -344,6 +391,29 @@ exp = explainer_lime.explain_instance(
 2. **Importancia Global**: Ranking de características
 3. **Explicaciones LIME**: Para clientes individuales
 4. **Árbol de Decisión Individual**: Visualización de un árbol del bosque
+
+### Tracking con MLflow
+
+Sistema completo de tracking para Random Forest:
+
+- **Parámetros**: n_estimators, class_weight, max_features, bootstrap, xai_method, lime_num_features
+- **Métricas**: accuracy, precision, recall, F1-score, AUC
+- **Artefactos**:
+  - Modelo (pickle)
+  - Scaler (pickle)
+  - Feature names (JSON)
+  - Feature importances (CSV)
+  - Matriz de confusión
+  - Gráfica de importancia global
+  - Explicaciones LIME individuales (múltiples clientes)
+  - Visualizaciones de árboles individuales
+- **Ubicación**: `exportaciones/rf-shoppers-lime/mlruns/`
+
+**Comando para visualizar experimentos:**
+```bash
+cd ejericio-modelos
+mlflow ui --backend-store-uri file:///$(pwd)/exportaciones/rf-shoppers-lime/mlruns
+```
 
 ### Archivo ejercicio 3
 
@@ -442,6 +512,30 @@ def integrated_gradients(inputs, model, baseline=None, num_steps=50):
 3. **Atribuciones por Característica**: Visualización de Integrated Gradients para casos individuales
 4. **Comparación Real vs Predicho**: Análisis de aciertos y errores
 
+### Tracking con MLflow
+
+Tracking detallado para Deep Learning con TensorFlow:
+
+- **Parámetros**: arquitectura (capas, neuronas), épocas, batch_size, dropout, learning_rate, threshold, xai_method, ig_steps
+- **Métricas**: 
+  - Por época: train/val accuracy, train/val loss
+  - Finales: test accuracy, precision, recall, F1-score, AUC
+- **Artefactos**:
+  - Modelo completo (.h5)
+  - Scaler (pickle)
+  - Feature names (JSON)
+  - Curvas de entrenamiento (accuracy/loss)
+  - Matriz de confusión
+  - Explicaciones con Integrated Gradients (múltiples clientes)
+  - Visualizaciones de atribuciones
+- **Ubicación**: `exportaciones/nn-shoppers-gi/mlruns/`
+
+**Comando para visualizar experimentos:**
+```bash
+cd ejericio-modelos
+mlflow ui --backend-store-uri file:///$(pwd)/exportaciones/nn-shoppers-gi/mlruns
+```
+
 ### Comparación: Random Forest vs Red Neuronal
 
 | Aspecto | Random Forest (Ej. 3) | Red Neuronal (Ej. 4) |
@@ -453,6 +547,7 @@ def integrated_gradients(inputs, model, baseline=None, num_steps=50):
 | **Entrenamiento** | Más rápido | Más lento (épocas) |
 | **Hiperparámetros** | Menos críticos | Más sensibles |
 | **Manejo de no-linealidad** | Excelente | Excelente |
+| **MLflow Tracking** | Completo | Completo con callbacks |
 
 ### Archivo ejercicio 4
 
@@ -487,6 +582,93 @@ El directorio `docs/` contiene material de apoyo adicional:
 - **LIME**: Cuando necesitas explicar cualquier modelo de caja negra
 - **Integrated Gradients**: Redes neuronales que requieren explicaciones precisas
 - **Feature Importance**: Análisis global rápido en modelos basados en árboles
+
+---
+
+## Gestión de Experimentos con MLflow
+
+### ¿Por qué MLflow?
+
+MLflow es una plataforma open-source para gestionar el ciclo de vida completo de machine learning. En esta práctica se utiliza para:
+
+1. **Reproducibilidad**: Registrar todos los parámetros e hiperparámetros
+2. **Comparación**: Comparar diferentes experimentos fácilmente
+3. **Tracking**: Seguimiento de métricas durante el entrenamiento
+4. **Versionado**: Gestionar diferentes versiones de modelos
+5. **Artefactos**: Almacenar modelos, gráficas y explicaciones organizadamente
+
+### Estructura de Exportaciones
+
+Cada modelo tiene su propia carpeta en `exportaciones/` con la siguiente estructura:
+
+```
+exportaciones/{modelo-nombre}/
+├── mlruns/              # Base de datos MLflow
+│   ├── 0/              # Experimento por defecto
+│   └── {experiment_id}/
+│       └── {run_id}/
+│           ├── meta.yaml
+│           ├── metrics/
+│           ├── params/
+│           ├── tags/
+│           └── artifacts/
+├── models/              # Modelos guardados
+├── plots/               # Gráficas generadas
+├── explanations/        # Explicaciones XAI (opcional)
+└── trees/               # Visualizaciones árboles (solo RF)
+```
+
+### Modelos con MLflow Integrado
+
+| Modelo | Experimento | Framework | Ubicación |
+|--------|-------------|-----------|------------|
+| **CNN** | CNN-Frutas-Explicable | mlflow.keras | `exportaciones/cnn-frutas-explicable/` |
+| **SVM** | SVM-Frutas-Explicable | mlflow.sklearn | `exportaciones/svm-frutas-explicable/` |
+| **Random Forest** | RF-Shoppers-LIME | mlflow.sklearn | `exportaciones/rf-shoppers-lime/` |
+| **Red Neuronal** | NN-Shoppers-IG | mlflow.tensorflow | `exportaciones/nn-shoppers-gi/` |
+
+### Comandos Útiles
+
+**Visualizar experimentos en UI:**
+```bash
+# Para un modelo específico
+cd ejericio-modelos
+mlflow ui --backend-store-uri file:///$(pwd)/exportaciones/cnn-frutas-explicable/mlruns
+
+# Acceder en navegador
+http://localhost:5000
+```
+
+**Cargar modelo guardado:**
+```python
+import mlflow
+
+# Cargar modelo de MLflow
+model_uri = "file:///path/to/mlruns/0/{run_id}/artifacts/model"
+loaded_model = mlflow.keras.load_model(model_uri)  # Para CNN/NN
+# o
+loaded_model = mlflow.sklearn.load_model(model_uri)  # Para SVM/RF
+```
+
+**Comparar experimentos:**
+```python
+import mlflow
+
+mlflow.set_tracking_uri("file:///path/to/mlruns")
+experiment = mlflow.get_experiment_by_name("CNN-Frutas-Explicable")
+runs = mlflow.search_runs(experiment_ids=[experiment.experiment_id])
+
+# Ver métricas de todos los runs
+print(runs[['metrics.test_accuracy', 'metrics.test_f1', 'params.epochs']])
+```
+
+### Beneficios Implementados
+
+1. **Organización**: Cada modelo tiene su carpeta independiente
+2. **Trazabilidad**: Todos los artefactos están versionados
+3. **Comparación**: Fácil comparación entre diferentes configuraciones
+4. **Portabilidad**: Los modelos pueden cargarse en cualquier máquina
+5. **Documentación**: Los parámetros y métricas se registran automáticamente
 
 ---
 
@@ -531,16 +713,18 @@ El directorio `docs/` contiene material de apoyo adicional:
 - [TensorFlow Documentation](https://www.tensorflow.org/)
 - [Scikit-learn Documentation](https://scikit-learn.org/)
 - [Keras Documentation](https://keras.io/)
+- [MLflow Documentation](https://mlflow.org/)
 - [LIME Documentation](https://lime-ml.readthedocs.io/)
 - [Fruits-360 Dataset](https://www.kaggle.com/moltean/fruits)
 - [Online Shoppers Dataset](https://archive.ics.uci.edu/ml/datasets/Online+Shoppers+Purchasing+Intention+Dataset)
 
-### Herramientas de XAI
+### Herramientas de XAI y MLOps
 
 - **LIME**: <https://github.com/marcotcr/lime>
 - **SHAP**: <https://github.com/slundberg/shap>
 - **Grad-CAM**: Implementado en TensorFlow/Keras
 - **Integrated Gradients**: TensorFlow official
+- **MLflow**: <https://mlflow.org/> - Gestión de experimentos y modelos
 
 ---
 
