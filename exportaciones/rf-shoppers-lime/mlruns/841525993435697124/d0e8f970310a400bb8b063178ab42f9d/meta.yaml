@@ -1,0 +1,15 @@
+artifact_uri: file:////home/felipep/Documentos/universidad/universidad 7mo/aprendizaje
+  automatico/practica 3/exportaciones/rf-shoppers-lime/mlruns/841525993435697124/d0e8f970310a400bb8b063178ab42f9d/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '841525993435697124'
+lifecycle_stage: active
+run_id: d0e8f970310a400bb8b063178ab42f9d
+run_name: bright-deer-562
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1768273054961
+status: 1
+tags: []
+user_id: felipep

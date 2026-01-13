@@ -1,0 +1,12 @@
+{
+  "model_type": "RandomForest",
+  "n_estimators": 100,
+  "class_weight": "balanced",
+  "random_state": 42,
+  "n_jobs": -1,
+  "test_size": 0.2,
+  "xai_method": "LIME",
+  "lime_num_features": 10,
+  "max_features": "sqrt",
+  "bootstrap": true
+}

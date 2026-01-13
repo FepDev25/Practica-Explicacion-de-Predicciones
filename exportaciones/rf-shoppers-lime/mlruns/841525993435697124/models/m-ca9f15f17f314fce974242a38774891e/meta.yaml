@@ -1,0 +1,11 @@
+artifact_location: file:////home/felipep/Documentos/universidad/universidad 7mo/aprendizaje
+  automatico/practica 3/exportaciones/rf-shoppers-lime/mlruns/841525993435697124/models/m-ca9f15f17f314fce974242a38774891e/artifacts
+creation_timestamp: 1768273049247
+experiment_id: '841525993435697124'
+last_updated_timestamp: 1768273050829
+model_id: m-ca9f15f17f314fce974242a38774891e
+model_type: null
+name: model
+source_run_id: 19fe856afe1045ee96a50100f32a04ae
+status: 2
+status_message: null
