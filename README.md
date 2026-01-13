@@ -282,13 +282,13 @@ cnn_model = Sequential([
 3. **Explicabilidad visual**: Grad-CAM muestra qué "ve" el modelo
 4. **Escalabilidad**: Mejor con grandes datasets
 
-#### Tracking con MLflow
+#### Tracking con MLflow ejercicio 2
 
 Integración completa con MLflow para gestión de experimentos:
 
 - **Parámetros**: arquitectura (capas, filtros), épocas, batch_size, learning_rate, dropout
 - **Métricas**: train/val accuracy, train/val loss, test accuracy, precision, recall, F1
-- **Artefactos**: 
+- **Artefactos**:
   - Modelo completo (.h5)
   - Arquitectura (JSON)
   - Pesos (.h5)
@@ -392,7 +392,7 @@ exp = explainer_lime.explain_instance(
 3. **Explicaciones LIME**: Para clientes individuales
 4. **Árbol de Decisión Individual**: Visualización de un árbol del bosque
 
-### Tracking con MLflow
+### Tracking con MLflow ejercicio 3
 
 Sistema completo de tracking para Random Forest:
 
@@ -410,6 +410,7 @@ Sistema completo de tracking para Random Forest:
 - **Ubicación**: `exportaciones/rf-shoppers-lime/mlruns/`
 
 **Comando para visualizar experimentos:**
+
 ```bash
 cd ejericio-modelos
 mlflow ui --backend-store-uri file:///$(pwd)/exportaciones/rf-shoppers-lime/mlruns
@@ -512,12 +513,12 @@ def integrated_gradients(inputs, model, baseline=None, num_steps=50):
 3. **Atribuciones por Característica**: Visualización de Integrated Gradients para casos individuales
 4. **Comparación Real vs Predicho**: Análisis de aciertos y errores
 
-### Tracking con MLflow
+### Tracking con MLflow ejercicio 4
 
 Tracking detallado para Deep Learning con TensorFlow:
 
 - **Parámetros**: arquitectura (capas, neuronas), épocas, batch_size, dropout, learning_rate, threshold, xai_method, ig_steps
-- **Métricas**: 
+- **Métricas**:
   - Por época: train/val accuracy, train/val loss
   - Finales: test accuracy, precision, recall, F1-score, AUC
 - **Artefactos**:
@@ -531,6 +532,7 @@ Tracking detallado para Deep Learning con TensorFlow:
 - **Ubicación**: `exportaciones/nn-shoppers-gi/mlruns/`
 
 **Comando para visualizar experimentos:**
+
 ```bash
 cd ejericio-modelos
 mlflow ui --backend-store-uri file:///$(pwd)/exportaciones/nn-shoppers-gi/mlruns
@@ -601,7 +603,7 @@ MLflow es una plataforma open-source para gestionar el ciclo de vida completo de
 
 Cada modelo tiene su propia carpeta en `exportaciones/` con la siguiente estructura:
 
-```
+```bash
 exportaciones/{modelo-nombre}/
 ├── mlruns/              # Base de datos MLflow
 │   ├── 0/              # Experimento por defecto
@@ -621,7 +623,7 @@ exportaciones/{modelo-nombre}/
 ### Modelos con MLflow Integrado
 
 | Modelo | Experimento | Framework | Ubicación |
-|--------|-------------|-----------|------------|
+| -------- | ------------- | ----------- | ------------ |
 | **CNN** | CNN-Frutas-Explicable | mlflow.keras | `exportaciones/cnn-frutas-explicable/` |
 | **SVM** | SVM-Frutas-Explicable | mlflow.sklearn | `exportaciones/svm-frutas-explicable/` |
 | **Random Forest** | RF-Shoppers-LIME | mlflow.sklearn | `exportaciones/rf-shoppers-lime/` |
@@ -630,6 +632,7 @@ exportaciones/{modelo-nombre}/
 ### Comandos Útiles
 
 **Visualizar experimentos en UI:**
+
 ```bash
 # Para un modelo específico
 cd ejericio-modelos
@@ -640,6 +643,7 @@ http://localhost:5000
 ```
 
 **Cargar modelo guardado:**
+
 ```python
 import mlflow
 
@@ -651,6 +655,7 @@ loaded_model = mlflow.sklearn.load_model(model_uri)  # Para SVM/RF
 ```
 
 **Comparar experimentos:**
+
 ```python
 import mlflow
 
