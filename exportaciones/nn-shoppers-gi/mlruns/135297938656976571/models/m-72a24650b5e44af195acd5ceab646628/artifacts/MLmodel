@@ -1,0 +1,23 @@
+artifact_path: file:////home/felipep/Documentos/universidad/universidad 7mo/aprendizaje
+  automatico/practica 3/exportaciones/nn-shoppers-gi/mlruns/135297938656976571/models/m-72a24650b5e44af195acd5ceab646628/artifacts
+flavors:
+  python_function:
+    data: data
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.tensorflow
+    python_version: 3.11.13
+  tensorflow:
+    code: null
+    data: data
+    keras_version: 2.15.0
+    model_type: keras
+    save_format: tf
+mlflow_version: 3.8.1
+model_id: m-72a24650b5e44af195acd5ceab646628
+model_size_bytes: 207881
+model_uuid: m-72a24650b5e44af195acd5ceab646628
+prompts: null
+run_id: e78b2e761fed4aa6af6a8126ff8e8de6
+utc_time_created: '2026-01-13 02:46:26.611141'

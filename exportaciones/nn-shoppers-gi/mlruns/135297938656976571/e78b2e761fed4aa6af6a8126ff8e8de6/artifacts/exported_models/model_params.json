@@ -1,0 +1,22 @@
+{
+  "architecture": "Dense",
+  "layers": [
+    64,
+    32,
+    16,
+    1
+  ],
+  "activation": "relu",
+  "output_activation": "sigmoid",
+  "dropout_rate": 0.2,
+  "optimizer": "adam",
+  "loss": "binary_crossentropy",
+  "epochs": 20,
+  "batch_size": 32,
+  "validation_split": 0.2,
+  "test_size": 0.2,
+  "threshold": 0.7,
+  "class_weight_strategy": "balanced",
+  "xai_method": "integrated_gradients",
+  "ig_steps": 50
+}
