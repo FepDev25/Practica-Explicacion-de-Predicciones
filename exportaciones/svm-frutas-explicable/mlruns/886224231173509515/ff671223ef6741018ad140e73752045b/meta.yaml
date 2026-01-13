@@ -1,0 +1,15 @@
+artifact_uri: file:////home/felipep/Documentos/universidad/universidad 7mo/aprendizaje
+  automatico/practica 3/exportaciones/svm-frutas-explicable/mlruns/886224231173509515/ff671223ef6741018ad140e73752045b/artifacts
+end_time: 1768271973372
+entry_point_name: ''
+experiment_id: '886224231173509515'
+lifecycle_stage: active
+run_id: ff671223ef6741018ad140e73752045b
+run_name: SVM_Frutas_v1
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1768271847187
+status: 3
+tags: []
+user_id: felipep

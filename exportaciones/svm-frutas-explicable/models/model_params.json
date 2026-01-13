@@ -1,0 +1,14 @@
+{
+  "kernel": "linear",
+  "probability": true,
+  "random_state": 42,
+  "num_classes": 6,
+  "max_per_class_train": 100,
+  "max_per_class_test": 30,
+  "background_removal": true,
+  "background_threshold": 240,
+  "image_size": [
+    100,
+    100
+  ]
+}

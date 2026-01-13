@@ -1,0 +1,23 @@
+artifact_path: file:////home/felipep/Documentos/universidad/universidad 7mo/aprendizaje
+  automatico/practica 3/exportaciones/svm-frutas-explicable/mlruns/886224231173509515/models/m-cb275f100f114e0f812dc8a6a556b343/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.11.13
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.7.1
+mlflow_version: 3.8.1
+model_id: m-cb275f100f114e0f812dc8a6a556b343
+model_size_bytes: 58812591
+model_uuid: m-cb275f100f114e0f812dc8a6a556b343
+prompts: null
+run_id: ff671223ef6741018ad140e73752045b
+utc_time_created: '2026-01-13 02:37:32.698675'
