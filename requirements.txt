@@ -1,0 +1,41 @@
+# ============================================
+# ENTORNO PYTHON PARA APRENDIZAJE AUTOMÁTICO
+# Proyecto: Práctica Explicación de Predicciones
+# Python: 3.10.x (recomendado para compatibilidad)
+# ============================================
+
+# ---- CORE ML/DL FRAMEWORKS ----
+tensorflow==2.15.0          # Deep Learning (CNN, Dense NN)
+scikit-learn==1.3.2         # ML tradicional (SVM, Random Forest)
+numpy==1.26.4               # Operaciones numéricas
+pandas==2.1.4               # Manipulación de datos
+
+# ---- VISUALIZACIÓN ----
+matplotlib==3.8.2           # Gráficos básicos
+seaborn==0.13.0             # Gráficos estadísticos
+opencv-python==4.8.1.78     # Procesamiento de imágenes (cv2)
+
+# ---- EXPLICABILIDAD (XAI) ----
+lime==0.2.0.1               # LIME para RF
+scikit-image==0.22.0        # Procesamiento de imágenes (skimage)
+
+# ---- EXPERIMENT TRACKING ----
+mlflow==2.9.2               # Tracking de experimentos
+# Dependencias adicionales de MLflow
+alembic==1.13.1
+sqlparse==0.4.4
+
+# ---- JUPYTER ----
+notebook==7.0.6             # Jupyter Notebook
+ipykernel==6.27.1           # Kernel de Python
+ipywidgets==8.1.1           # Widgets interactivos
+
+# ---- UTILIDADES ----
+Pillow==10.1.0              # Manejo de imágenes (PIL)
+scipy==1.11.4               # Funciones científicas
+tqdm==4.66.1                # Barras de progreso
+
+# ---- COMPATIBILIDAD ----
+protobuf==4.23.4            # Para TensorFlow
+h5py==3.10.0                # Guardar modelos Keras
+packaging==23.2             # Utilidad de empaquetado
